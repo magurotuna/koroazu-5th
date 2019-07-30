@@ -8,9 +8,11 @@
     "start": "ts-node index.ts"
   },
   "dependencies": {
+    "js-yaml": "^3.13.1",
     "puppeteer": "^1.19.0"
   },
   "devDependencies": {
+    "@types/js-yaml": "^3.12.1",
     "@types/node": "^12.6.8",
     "@types/puppeteer": "^1.19.0",
     "ts-node": "^8.3.0",

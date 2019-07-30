@@ -1,21 +1,15 @@
-import * as puppeteer from 'puppeteer'
+import * as path from 'path'
+import { fetchTweets } from './lib/fetch-tweets'
+import { count } from './lib/count'
+
 
 const main = async () => {
-  const browser = await puppeteer.launch()
-  const page = await browser.newPage()
+  // const tweets = await fetchTweets()
 
-  // ヤフーリアルタイム検索トップ
-  await page.goto('https://search.yahoo.co.jp/realtime', { waitUntil: 'networkidle0' })
-
-  // 検索欄に `#ころあず5周年` を入れる
-  await page.type('#yschsp', '#ころあず5周年')
-  // 検索実行
-  await page.click('#sbn > fieldset > div.sbox_1.cf > input')
-  // 読み込み終了を待機
-  await page.waitFor('#TSm', { timeout: 100000 })
-  // スクショ
-  await page.screenshot({ path: 'test.png' })
-  await browser.close()
+  const songsYamlPath = path.resolve(path.join(__dirname, 'lib', 'songs.yml'))
+  const tweetsJsonPath = path.resolve(path.join(__dirname, 'output', 'tweets_2019-7-31_3-57.json'))
+  const counter = count(songsYamlPath, tweetsJsonPath)
+  console.log(counter)
 }
 
 main()
