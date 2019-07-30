@@ -75,3 +75,5 @@ Twitterの [#ころあず5周年](https://twitter.com/search?q=%23%e3%81%93%e3%8
   { name: '愛しさの存在', count: 1 }
 ]
 ```
+
+<img width="1270" alt="第1回集計のグラフ" src="https://user-images.githubusercontent.com/23649474/62164405-50c31680-b357-11e9-82ec-556105a0c5ac.png">
