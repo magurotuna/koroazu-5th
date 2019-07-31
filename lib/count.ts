@@ -1,13 +1,13 @@
 import * as fs from 'fs'
 import * as yaml from 'js-yaml'
-import { currentDatetime, toHalfWidth, makeCounter, Counter } from './utils'
+import { currentDatetime, normalizeText, makeCounter, Counter } from './utils'
 
 interface ConvertedCounterElement {
   name: string;
   count: number;
 }
 
-type ConvertedCounter = ConvertedCounterElement[]
+export type ConvertedCounter = ConvertedCounterElement[]
 
 interface Songs {
   [key: string]: string[];
@@ -32,11 +32,10 @@ export const count = (songsYamlPath: string, tweetsOrJsonPath: string[] | string
       : tweetsOrJsonPath
 
   tweets.forEach(tweet => {
-    // ツイート文章中の大文字を小文字に、全角を半角に変換する
-    const converted = toHalfWidth(tweet.toLowerCase())
+    const converted = normalizeText(tweet)
 
     for (let key of songNames) {
-      const patterns: string[] = songs[key].map(p => p.toLowerCase())
+      const patterns: string[] = songs[key].map(p => normalizeText(p))
       if (patterns.some(p => converted.includes(p))) {
         counter[key] += 1
       }

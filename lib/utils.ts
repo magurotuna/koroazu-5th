@@ -1,3 +1,5 @@
+import { ConvertedCounter } from './count'
+
 export const currentDatetime = () => {
   const now = new Date()
   const year = now.getFullYear()
@@ -8,8 +10,36 @@ export const currentDatetime = () => {
   return `${year}-${month}-${date}_${hour}-${minute}`
 }
 
+export interface Counter {
+  [key: string]: number;
+}
+// キーとなる配列を渡して、バリューがすべて0のObjectを生成して返す
+export const makeCounter = (keys: string[]): Counter => {
+  const obj: Counter = {}
+  keys.forEach(key => {
+    obj[key] = 0
+  })
+  return obj
+}
+
+export const toBackSlashSeperatedValues = (counter: ConvertedCounter) => {
+  return counter.map(c => `${c.name}\\${c.count}`).join('\n')
+}
+
+/**
+ * 曲名の表記揺れに極力対応するため、下記の処理を施す
+ * 1. 英大文字 -> 英小文字
+ * 2. 全角 -> 半角
+ * 3. 中点を削除
+ * 4. 半角スペースを削除
+ * @param text 
+ */
+export const normalizeText = (text: string) => {
+  return toHalfWidth(text).toLowerCase().replace(/・/g, '').replace(/ /g, '')
+}
+
 // ref: [JavaScript で英数字や記号を全角から半角へ変換する方法](https://webllica.com/change-double-byte-to-half-width/)
-export const toHalfWidth = (str: string) => {
+const toHalfWidth = (str: string) => {
   // 半角変換
   const halfVal = str.replace(/[！-～]/g,
     function (tmpStr) {
@@ -24,17 +54,4 @@ export const toHalfWidth = (str: string) => {
     .replace(/￥/g, "\\")
     .replace(/　/g, " ")
     .replace(/〜/g, "~")
-}
-
-
-export interface Counter {
-  [key: string]: number;
-}
-// キーとなる配列を渡して、バリューがすべて0のObjectを生成して返す
-export const makeCounter = (keys: string[]): Counter => {
-  const obj: Counter = {}
-  keys.forEach(key => {
-    obj[key] = 0
-  })
-  return obj
 }
