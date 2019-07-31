@@ -1,6 +1,8 @@
 import * as puppeteer from 'puppeteer'
+import * as fs from 'fs'
+import { currentDatetime } from './utils'
 
-export const fetchTweets = async () => {
+export const fetchTweets = async (shouldOutput = true) => {
   const devices = require('puppeteer/DeviceDescriptors')
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
@@ -48,12 +50,27 @@ export const fetchTweets = async () => {
     const t: string[] = []
     tweetContainers.forEach(c => {
       const h2 = c.querySelector('h2')
-      if (h2 !== null) {
+      if (h2 !== null && !h2.innerText.startsWith('RT ')) { // `RT `から始まるツイートはリツイートなので除外
         t.push(h2.innerText)
       }
     })
     return t
   })
   await browser.close()
+
+  if (shouldOutput) {
+    output(tweets)
+  }
   return tweets
+}
+
+const output = (tweets: string[]) => {
+  const tweetOutputFileName = `tweets_${currentDatetime()}.json`
+  fs.writeFile(`./output/${tweetOutputFileName}`, JSON.stringify(tweets), err => {
+    if (err) {
+      console.error(err)
+    } else {
+      console.log(`output/${tweetOutputFileName} に取得したツイートを出力しました。`)
+    }
+  })
 }

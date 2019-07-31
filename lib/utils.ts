@@ -30,7 +30,7 @@ export const toHalfWidth = (str: string) => {
 export interface Counter {
   [key: string]: number;
 }
-// キーとなる配列を渡して、バリューがすべて0のMapを生成して返す
+// キーとなる配列を渡して、バリューがすべて0のObjectを生成して返す
 export const makeCounter = (keys: string[]): Counter => {
   const obj: Counter = {}
   keys.forEach(key => {
