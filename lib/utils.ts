@@ -29,7 +29,7 @@ export const makeCounter = (keys: string[]): Counter => {
  * @param text 
  */
 export const normalizeText = (text: string) => {
-  return toHalfWidth(text).toLowerCase().replace('・', '').replace(' ', '')
+  return toHalfWidth(text).toLowerCase().replace(/・/g, '').replace(/ /g, '')
 }
 
 // ref: [JavaScript で英数字や記号を全角から半角へ変換する方法](https://webllica.com/change-double-byte-to-half-width/)
