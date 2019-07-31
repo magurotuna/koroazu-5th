@@ -19,7 +19,6 @@ interface Songs {
  * @param shouldOutput カウントの結果をファイルに出力するか否か
  */
 export const count = (songsYamlPath: string, tweetsOrJsonPath: string[] | string, shouldOutput = true) => {
-  // lib/songs.yml を読み込む
   const yamlText = fs.readFileSync(songsYamlPath).toString()
   const songs: Songs = yaml.safeLoad(yamlText)
   const songNames = Object.keys(songs)
