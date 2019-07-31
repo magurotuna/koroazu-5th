@@ -5,17 +5,39 @@
   "author": "Yusuke Tanaka <wing0920@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "test": "jest"
   },
   "dependencies": {
     "js-yaml": "^3.13.1",
     "puppeteer": "^1.19.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.16",
     "@types/js-yaml": "^3.12.1",
     "@types/node": "^12.6.8",
     "@types/puppeteer": "^1.19.0",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/__test__/*.+(ts|tsx|js)"
+    ]
   }
 }
