@@ -1,4 +1,5 @@
 # NOTE: 大文字を小文字に統一、全角を半角に統一した上で判定を行うようにして、できるだけ拾う
+# ref: 歌ネット https://www.uta-net.com/artist/16876/
 I can't live without you.:
   - I can't live without you.
   - I can't live without you
