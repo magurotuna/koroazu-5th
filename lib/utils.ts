@@ -1,3 +1,5 @@
+import { ConvertedCounter } from './count'
+
 export const currentDatetime = () => {
   const now = new Date()
   const year = now.getFullYear()
@@ -18,6 +20,10 @@ export const makeCounter = (keys: string[]): Counter => {
     obj[key] = 0
   })
   return obj
+}
+
+export const toBackSlashSeperatedValues = (counter: ConvertedCounter) => {
+  return counter.map(c => `${c.name}\\${c.count}`).join('\n')
 }
 
 /**

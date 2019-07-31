@@ -7,7 +7,7 @@ interface ConvertedCounterElement {
   count: number;
 }
 
-type ConvertedCounter = ConvertedCounterElement[]
+export type ConvertedCounter = ConvertedCounterElement[]
 
 interface Songs {
   [key: string]: string[];
